@@ -9,7 +9,7 @@ sudo hostnamectl set-hostname ${NEW_HOSTNAME}
 echo "setting static ip"
 echo "please re-run this setup script after rebooting the machine and logging back in"
 if [ ! -f /etc/systemd/network/10-static.network ]; then
-	sudo cp ./includes/10-static.network //etc/systemd/network/
+	sudo cp ./includes/10-static.network /etc/systemd/network/
 	sudo systemctl restart systemd-networkd
 	exit
 fi
@@ -25,4 +25,11 @@ fi
 echo "building docker-dhcp container"
 ./networkboot/docker-dhcp/build
 
-
+#setup dhcpd service
+echo "setting up dhcpd service"
+if [ ! -f /etc/systemd/system/dhcpd.service ]; then
+	sudo cp ./includes/dhcpd.service /etc/systemd/system/
+	sudo systemctl enable dhcpd
+	sudo systemctl start dhcpd
+fi
+systemctl status dhcpd
