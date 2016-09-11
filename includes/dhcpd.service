@@ -19,7 +19,7 @@ ExecStartPre=-/usr/bin/docker rm -v %n
 # Start main
 ExecStart=/usr/bin/docker run --name %n --rm \
   --net host \
-  --volume=/home/core/bootstrap-hack/dhcp/data:/data \
+  --volume=/var/lib/bootstrap-hack/dhcp/dhcpd:/data \
   networkboot/dhcpd
 
 # Stop container
