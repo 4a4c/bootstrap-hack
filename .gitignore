@@ -1,2 +1,3 @@
 networkboot/
 dhcpd.leases*
+tftp/tftpboot/*

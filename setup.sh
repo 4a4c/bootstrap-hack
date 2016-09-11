@@ -37,3 +37,8 @@ systemctl status dhcpd
 #build tftpd container
 echo "== building tftpd container =="
 docker build -t 4a4c/tftpd ./tftp/
+
+#download undionly.kpxe
+echo "== downloading undionly.kpxe =="
+mkdir -p tftp/tftpboot
+curl -o tftp/tftpboot/undionly.kpxe http://boot.ipxe.org/undionly.kpxe
