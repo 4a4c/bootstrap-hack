@@ -7,7 +7,7 @@ MAINTAINER Justin Luna
 # docker build -t 4a4c/tftpd .
 
 # Start the container with the follonwing command:
-# docker run -it --rm -p 69:69 -v $(pwd):/tftpboot  4a4c/tftpd
+# docker run -it --rm --net=host -v /home/core/bootstrap-local/tftp/tftpboot/:/tftpboot 4a4c/tftpd
 
 RUN adduser tftpd
 RUN mkdir /tftpboot
