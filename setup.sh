@@ -32,13 +32,25 @@ if [ ! -f /etc/systemd/system/dhcpd.service ]; then
 	sudo systemctl enable dhcpd
 	sudo systemctl start dhcpd
 fi
-systemctl status dhcpd
 
 #build tftpd container
 echo "== building tftpd container =="
 docker build -t 4a4c/tftpd ./tftp/
 
 #download undionly.kpxe
-echo "== downloading undionly.kpxe =="
-mkdir -p tftp/tftpboot
-curl -o tftp/tftpboot/undionly.kpxe http://boot.ipxe.org/undionly.kpxe
+if [ ! -f tftp/tftpboot/undionly.kpxe ]; then
+	echo "== downloading undionly.kpxe =="
+	mkdir -p tftp/tftpboot
+	curl -o tftp/tftpboot/undionly.kpxe http://boot.ipxe.org/undionly.kpxe
+fi
+
+#setup tftpd service
+echo "== setting up tftpd service =="
+if [ ! -f /etc/systemd/system/tftpd.service ]; then
+        sudo cp ./includes/tftpd.service /etc/systemd/system/
+        sudo systemctl enable tftpd
+        sudo systemctl start tftpd
+fi
+
+echo "== done =="
+exit
