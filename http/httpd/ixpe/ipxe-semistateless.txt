@@ -1,0 +1,11 @@
+#!ipxe
+set repo-base ${128.10}
+set channel ${128.11}
+set version ${128.12}
+set cloud-config-base ${128.13}
+set cloud-config ${128.14}
+set root-vol ${128.15}
+
+kernel ${repo-base}/${channel}/${version}/coreos_production_pxe.vmlinuz ${root-vol} cloud-config-url=${cloud-config-base}/${cloud-config}
+initrd ${repo-base}/${channel}/${version}/coreos_production_pxe_image.cpio.gz
+boot
