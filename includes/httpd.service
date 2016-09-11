@@ -1,0 +1,29 @@
+[Unit]
+Description=http daemon
+
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+RestartSec=5
+KillMode=none
+
+# Environment
+Environment="TMPDIR=/var/tmp/"
+
+## Cleanup old container
+ExecStartPre=-/usr/bin/docker kill %n
+ExecStartPre=-/usr/bin/docker rm -v %n
+
+# Start main
+ExecStart=/usr/bin/docker run --name %n --rm \
+  --net host \
+  --volume=/var/lib/bootstrap-hack/http/httpd/:/usr/local/apache2/htdocs/ \
+  httpd:2.4
+
+# Stop container
+ExecStop=/usr/bin/docker stop %n
+
+[Install]
+WantedBy=multi-user.target

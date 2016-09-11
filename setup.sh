@@ -52,5 +52,13 @@ if [ ! -f /etc/systemd/system/tftpd.service ]; then
         sudo systemctl start tftpd
 fi
 
+#setup httpd service
+echo "== setting up httpd service =="
+if [ ! -f /etc/systemd/system/httpd.service ]; then
+        sudo cp ./includes/httpd.service /etc/systemd/system/
+        sudo systemctl enable httpd
+        sudo systemctl start httpd
+fi
+
 echo "== done =="
 exit
