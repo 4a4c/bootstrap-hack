@@ -1,3 +1,4 @@
 networkboot/
 dhcpd.leases*
 tftp/tftpboot/*
+http/httpd/coreos/*
