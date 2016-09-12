@@ -12,8 +12,8 @@ tail -n +2 $BASE_DIR/coreos-builds.csv | while read line; do
   BUILD=$(echo $CURRENT_LINE | awk -F ',' '{print $2}')
   COREOS_SOURCE="https://${CHANNEL}.release.core-os.net/amd64-usr/${BUILD}"
 
-  # test messagge
-  echo "channel is ${CHANNEL} build is ${BUILD}"
+  # echo messagge
+  echo "synching ${CHANNEL} ${BUILD}"
 
   # ensure download dir exists
   mkdir -p $COREOS_BASE/$CHANNEL/$BUILD

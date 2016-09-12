@@ -60,5 +60,9 @@ if [ ! -f /etc/systemd/system/httpd.service ]; then
         sudo systemctl start httpd
 fi
 
+#download coreos images
+echo "== downloading required coreos images =="
+http/coreos-download.sh
+
 echo "== done =="
 exit
